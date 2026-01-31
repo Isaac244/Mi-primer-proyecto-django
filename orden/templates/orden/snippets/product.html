@@ -1,0 +1,16 @@
+{% load funcion_tag %}
+<div class="row">
+    <div class="col-2">
+        {% if product.image %}
+            <img src="{{product.image.url}}" alt="ImagenProduct" width="80" height="70">
+        {% endif %}
+    </div>
+    <div class="col">
+        <div class="row">
+            <span><a href="{% url 'product-detail' product.slug %}">Editar: {{product.title}}</a></span>
+        </div>
+        <div class="row">
+            <strong class="text=primary">{{product.price | precio_tag}}</strong>
+        </div>
+    </div>
+</div>

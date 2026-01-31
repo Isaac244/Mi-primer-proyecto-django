@@ -1,0 +1,14 @@
+<!--Declaracion de mensaje en html aunque se puede hacer en JS-->
+{%if messages%}
+    {%for m in messages%}
+        {%if m.tags == 'success'%}
+        <div class="alert alert-success">
+            {{m}}
+        </div>
+        {%else%}
+        <div class="alert alert-danger">
+            {{m}}
+        </div>
+        {%endif%}
+    {%endfor%}
+{%endif%}
