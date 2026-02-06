@@ -44,6 +44,7 @@ def select_direccion(request):
         'direccion_envios' : direccion_envios,
     })
 
+
 @login_required(login_url='login')
 def check_direccion(request, pk):
     cart = funcionCarrito(request)
@@ -57,3 +58,21 @@ def check_direccion(request, pk):
     orden.update_direccion_envio(direccion_envio)
 
     return redirect('direccion')
+
+
+@login_required(login_url='login')
+def confirmacion(request):
+    cart = funcionCarrito(request)
+    orden = funcionOrden(cart, request)
+
+    direccion_envio = orden.direccion_envio
+
+    if direccion_envio is None:
+        return redirect('direccion')
+    
+    return render(request, 'orden/confirmacion.html',{
+        'cart' : cart,
+        'orden' : orden,
+        'direccion_envio' : direccion_envio,
+        'breadcrumb' : breadcrumb(address=True, confirmation=True),
+    })

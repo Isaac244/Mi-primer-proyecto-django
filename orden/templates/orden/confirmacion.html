@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    {% include 'orden/snippets/breadcrumb.html' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="col-8">
+    <div class="h3">
+        Confirmacion del Pedido
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="badge bg-primary text-wrap">
+                        Direccion de envio
+                    </div>
+                    <div class="fst-italic">
+                        Direccion: {{direccion_envio.direccion}}
+                    </div>
+                    <div class="fst-italic">
+                        Domicilio: {{direccion_envio.line1}}
+                    </div>
+                    <div class="fst-italic">
+                        Referencia: {{direccion_envio.reference}}
+                    </div>
+                    <div class="fst-italic">
+                        Codigo Postal: {{direccion_envio.postal_code}}
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="badge bg-danger text-wrap">
+                        Metodos de Pago
+                    </div>
+                    <div class="fst-italic">
+                        Tarjeta de Pago: 1645
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="badge bg-warning text-wrap">
+                        Codigo de Descuento
+                    </div>
+                    <form>
+                        <input type="text" name="codigo" value="" class="form-control" placeholder="Codigo Descuento">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-2 alert alert-primary" role="alert">
+        Esta es tu orden hasta el momento <a href="{% url 'orden' %}" class="alert-link">Mi orden</a> puedes modificarla si quieres
+    </div>
+    <div class="mt-1">
+        <div class="card">
+            <div class="card-body">
+                {% for product in cart.products.all %}
+                    {% include 'orden/snippets/product.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    {% include 'orden/snippets/detalles.html' %}
+
+    <div class="">
+        <div class="card card border-danger mb-3" style="width: 18rem;">
+            <div class="card-body">
+                <a class="btn btn-danger d-grid gap-2" href="">Eliminar Orden</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
