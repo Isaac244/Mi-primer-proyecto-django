@@ -5,18 +5,10 @@ from DirEnvio.models import DireccionEnvio
 from enum import Enum
 import uuid
 from django.db.models.signals import pre_save
+from .comun import OrdenStatus
+from .comun import choices
 
 # Create your models here.
-class OrdenStatus(Enum):
-    CREATED = 'CREATED'
-    PAYED = 'PAYED'
-    COMPLETED = 'COMPLETED'
-    CANCELED = 'CANCELED'
-
-
-choices = [ (tag, tag.value) for tag in OrdenStatus ]
-
-
 class Orden(models.Model):
     ordenID = models.CharField(max_length=100, null=False, blank=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

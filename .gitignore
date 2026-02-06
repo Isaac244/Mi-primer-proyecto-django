@@ -104,3 +104,6 @@ $RECYCLE.BIN/
 
 .vscode/
 .gitignore
+
+__pycache__/
+.media/
