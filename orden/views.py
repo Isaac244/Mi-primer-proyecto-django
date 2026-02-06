@@ -1,10 +1,11 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from carts.funciones import funcionCarrito
+from carts.funciones import funcionCarrito, deleteCart
 from .models import Orden
-from .utils import funcionOrden
+from .utils import funcionOrden, deleteOrden
 from django.contrib.auth.decorators import login_required
 from .utils import breadcrumb
 from DirEnvio.models import DireccionEnvio
+from django.contrib import messages
 
 # Create your views here.
 @login_required(login_url='login')
@@ -76,3 +77,19 @@ def confirmacion(request):
         'direccion_envio' : direccion_envio,
         'breadcrumb' : breadcrumb(address=True, confirmation=True),
     })
+
+
+@login_required(login_url='login')
+def cancelar_orden(request):
+    cart = funcionCarrito(request)
+    orden = funcionOrden(cart, request)
+
+    if request.user.id != orden.user_id:
+        return redirect('index')
+    
+    orden.cancelar()
+    deleteCart(request)
+    deleteOrden(request)
+
+    messages.error(request, 'Orden Eliminada Correctamente')
+    return redirect('index')

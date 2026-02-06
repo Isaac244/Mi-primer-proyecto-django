@@ -8,4 +8,5 @@ urlpatterns = [
     path('seleccionar/direccion', views.select_direccion, name='select_direccion'),
     path('establecer/direccion/<int:pk>', views.check_direccion, name='check_direccion'),
     path('confirmacion', views.confirmacion, name='confirmacion'),
+    path('cancelar', views.cancelar_orden, name='cancelar'),
 ]

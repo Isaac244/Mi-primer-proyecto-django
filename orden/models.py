@@ -48,6 +48,14 @@ class Orden(models.Model):
         
         return direccion_envio
     
+    def cancelar(self):
+        self.status = OrdenStatus.CANCELED
+        self.save()
+
+    def completado(self):
+        self.status = OrdenStatus.COMPLETED
+        self.save()
+    
     def update_direccion_envio(self, direccion_envio):
         self.direccion_envio = direccion_envio
         self.save()
