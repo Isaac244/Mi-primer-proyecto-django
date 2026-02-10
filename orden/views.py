@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import EmptyQuerySet
+from .decorador import validar_cart_and_orden
 
 # Create your views here.
 class OrdenViews(LoginRequiredMixin, ListView):
@@ -19,9 +20,8 @@ class OrdenViews(LoginRequiredMixin, ListView):
         return self.request.user.ordenes_completadas()
 
 @login_required(login_url='login')
-def orden(request):
-    cart = funcionCarrito(request)
-    orden = funcionOrden(cart, request)
+@validar_cart_and_orden
+def orden(request, cart, orden):
 
     return render(request, 'orden/orden.html', {
         'cart': cart,
@@ -31,10 +31,8 @@ def orden(request):
 
 
 @login_required(login_url='login')
-def direccion(request):
-    cart = funcionCarrito(request)
-    orden = funcionOrden(cart, request)
-
+@validar_cart_and_orden
+def direccion(request, cart, orden):
     direccion_envio = orden.get_or_set_direccion_envio()
     contDireccion = request.user.direccionenvio_set.count() > 1
 
@@ -57,10 +55,9 @@ def select_direccion(request):
 
 
 @login_required(login_url='login')
-def check_direccion(request, pk):
-    cart = funcionCarrito(request)
-    orden = funcionOrden(cart, request)
-
+@validar_cart_and_orden
+def check_direccion(request, cart, orden, pk):
+    
     direccion_envio = get_object_or_404(DireccionEnvio, pk=pk)
 
     if request.user.id != direccion_envio.user_id:
@@ -72,9 +69,8 @@ def check_direccion(request, pk):
 
 
 @login_required(login_url='login')
-def confirmacion(request):
-    cart = funcionCarrito(request)
-    orden = funcionOrden(cart, request)
+@validar_cart_and_orden
+def confirmacion(request, cart, orden):
 
     direccion_envio = orden.direccion_envio
 
@@ -90,9 +86,8 @@ def confirmacion(request):
 
 
 @login_required(login_url='login')
-def cancelar_orden(request):
-    cart = funcionCarrito(request)
-    orden = funcionOrden(cart, request)
+@validar_cart_and_orden
+def cancelar_orden(request, cart, orden):
 
     if request.user.id != orden.user_id:
         return redirect('index')
@@ -106,9 +101,8 @@ def cancelar_orden(request):
 
 
 @login_required(login_url='login')
-def completado(request):
-    cart = funcionCarrito(request)
-    orden = funcionOrden(cart, request)
+@validar_cart_and_orden
+def completado(request, cart, orden):
 
     if request.user.id !=  orden.user_id:
         return redirect('index')
