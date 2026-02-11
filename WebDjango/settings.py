@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'carts',
     'orden',
     'DirEnvio',
+    'promo_codigo',
 ]
 
 MIDDLEWARE = [

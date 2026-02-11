@@ -34,6 +34,7 @@ urlpatterns = [
     path('carrito/', include('carts.urls')),
     path('orden/', include('orden.urls')),
     path('direcciones/', include('DirEnvio.urls')),
+    path('codigopromo/', include('promo_codigo.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
