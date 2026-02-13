@@ -7,7 +7,7 @@ from orden.decorador import validar_cart_and_orden
 @validar_cart_and_orden
 def validar(request,cart, orden):
     codigo = request.GET.get('code')
-    promo_codigo = PromoCodigo.objects.filter(codigo=codigo).first()
+    promo_codigo = PromoCodigo.objects.get_validar(codigo)
 
     if promo_codigo is None:
         return JsonResponse({
