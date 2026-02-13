@@ -16,6 +16,10 @@ class PromoCodigo(models.Model):
     def __str__(self):
         return self.codigo
     
+    def codigo_usado(self):
+        self.used = True
+        self.save()
+
 
 def set_codigo(sender, instance, *args, **kwargs):
     
