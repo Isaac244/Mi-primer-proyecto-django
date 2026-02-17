@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col">
+    <div class="h3">
+        Metodo de Pago
+    </div>
+</div>
+
+<div class="">
+    <form action="" method="post" id="payment-form">
+        <div class="form-group">
+            <div class="form-control" id="card-element">
+
+            </div>
+            <div id="card-error" role="alert">
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Agregar Tarjeta</button>
+    </form>
+</div>
+
+<script>
+    var STRIPE_PUBLIC_KEY = ''
+    var CSRF_TOKEN = '{{ crsf_token }}'
+</script>
+
+<script src="https://js.stripe.com/clover/stripe.js"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

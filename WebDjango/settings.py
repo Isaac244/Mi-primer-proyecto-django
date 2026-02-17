@@ -27,8 +27,10 @@ SECRET_KEY = 'django-insecure-z2b1bpcjm!cf5zu@q=zn4bg33t6p$1-glqjrb+0ruy&(&pesc(
 DEBUG = True
 
 ALLOWED_HOSTS = []
-SOCIAL_AUTH_FACEBOOK_KEY = "3005459346304435"
-SOCIAL_AUTH_FACEBOOK_SECRET = "f9af57bd38b8ba889f1c74a1c00eacb0"
+
+
+#Llaves de Stripe
+
 
 # Application definition
 
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'orden',
     'DirEnvio',
     'promo_codigo',
+    'MetodoPago',
 ]
 
 MIDDLEWARE = [

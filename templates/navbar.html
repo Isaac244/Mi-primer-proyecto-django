@@ -4,6 +4,7 @@
 {% url 'carts' as cart %}
 {% url 'direccion_envio' as direccion_envio %}
 {% url 'completados' as completados %}
+{% url 'crear' as crear %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -60,6 +61,12 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'completados' %}">Mis Ordenes
             <span class="fas fa-shipping-fast"></span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'crear' %}">Metodos de Pago
+            <span class="fab fa-cc-stripe"></span>
           </a>
         </li>
       </ul>
